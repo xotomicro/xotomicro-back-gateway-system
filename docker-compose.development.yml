@@ -1,0 +1,41 @@
+version: '2.1'
+services:
+
+  ###################
+  ##    GATEWAY    ##
+  ###################
+  
+  xotomicro-back-external-gateway-system:
+    build: 
+      context: .
+      dockerfile: docker/dockerfile.development
+    container_name: xotomicro-back-external-gateway-system
+    image: xotomicro-back-external-gateway-system
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - PROFILE_GATEWAY=docker-external-gateway-system
+      - ENV=${ENV}
+      - ALLOWED_URL=http://localhost:7070
+      - JVM_OPTS=-Xmx512m -Xms512m
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app
+      
+  xotomicro-back-internal-gateway-system:
+    build: 
+      context: .
+      dockerfile: docker/dockerfile.development
+    container_name: xotomicro-back-internal-gateway-system
+    image: xotomicro-back-internal-gateway-system
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - PROFILE_GATEWAY=docker-internal-gateway-system
+      - ENV=${ENV}
+      - JVM_OPTS=-Xmx512m -Xms512m
+    ports:
+      - 8070:8080
+    volumes:
+      - ./:/app
+    env_file:
+      - .env

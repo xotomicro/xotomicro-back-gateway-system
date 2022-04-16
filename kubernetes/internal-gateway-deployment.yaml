@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: xotomicro-back-internal-gateway-system
+  name: xotomicro-back-internal-gateway-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: xotomicro-back-internal-gateway-system
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.service: xotomicro-back-internal-gateway-system
+    spec:
+      containers:
+        - env:
+            - name: JVM_OPTS
+              value: -Xmx512m -Xms512m
+            - name: PROFILE_GATEWAY
+              value: docker-internal-gateway-system
+            - name: SECRET_KEY
+              value: 1jcryR3Lsf
+          image: xotomicro-back-internal-gateway-system
+          imagePullPolicy: IfNotPresent
+          name: xotomicro-back-internal-gateway-system
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

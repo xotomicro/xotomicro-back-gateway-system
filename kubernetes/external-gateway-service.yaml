@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: xotomicro-back-external-gateway-system
+  name: xotomicro-back-external-gateway-system
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: xotomicro-back-external-gateway-system
+status:
+  loadBalancer: {}

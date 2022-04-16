@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:9090/eureka
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: xotomicro-back-internal-gateway-system
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: xotomicro-back-auth-service
+          uri: lb://xotomicro-back-auth-service
+          predicates:
+            - Path=/auth/**
+
+        - id: xotomicro-back-user-service
+          uri: lb://xotomicro-back-user-service
+          predicates:
+            - Path=/users/**
+
+        - id: xotomicro-back-product-service
+          uri: lb://xotomicro-back-product-service
+          predicates:
+            - Path=/products/**
+
+        - id: xotomicro-back-order-service
+          uri: lb://xotomicro-back-order-service
+          predicates:
+            - Path=/orders/**
+
+        - id: xotomicro-back-event-service
+          uri: lb://xotomicro-back-event-service
+          predicates:
+            - Path=/events/**
