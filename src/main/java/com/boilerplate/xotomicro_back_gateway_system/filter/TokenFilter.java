@@ -79,6 +79,7 @@ public class TokenFilter extends AbstractGatewayFilterFactory<TokenFilter.Config
         // if (getRedisTokenBlackList().contains(token)){
         //     throw new JwtException("Token invalid");
         // }
+
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
         } catch (ExpiredJwtException ex) {

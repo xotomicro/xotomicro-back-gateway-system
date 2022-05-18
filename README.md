@@ -1,4 +1,5 @@
 ### 🤷🏼‍♂️ PREREQUISITE DEV
+
 - Java version 11 (at least)
 - Maven
 - Docker environment
