@@ -1,0 +1,4 @@
+FROM maven:latest
+WORKDIR /app
+EXPOSE 8080
+CMD mvn spring-boot:run -Dspring-boot.run.arguments="--jwt.token.secret-key=${SECRET_KEY} --spring.profiles.active=${PROFILE_GATEWAY}"
